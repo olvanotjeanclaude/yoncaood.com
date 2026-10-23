@@ -39,3 +39,7 @@ Homestead.json
 Homestead.yaml
 .DS_Store
 .user.ini
+yedek-*
+logs
+error_docs
+.pki
