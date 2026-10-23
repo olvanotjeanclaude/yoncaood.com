@@ -32,6 +32,12 @@ class DskBankController extends Controller
 		$this->mydata = $mydata;
 	}
 
+	/**
+	 * Akış: saveBooking() -> initPayment() kullanıcıyı bankaya yönlendirir ->
+	 * ödemeden sonra banka callback() metodunu çağırır. "deposited" + status 1 ise
+	 * MyData üzerinde satış yapılır, PNR (pnr_number) markSaleAsSuccess() ile
+	 * passenger_information tablosuna kaydedilir ve ardından başarı e-postası gönderilir.
+	 */
 	public function saveBooking(Request $request)
 	{
 		$request->validate([
@@ -125,7 +131,9 @@ class DskBankController extends Controller
 			$data = $response->json();
 
 			if (isset($data['formUrl'])) {
-				PassengerInformation::where('orderid', $orderNumber)->update(['bank_order_id' => $data['orderId']]);
+				PassengerInformation::where('orderid', $orderNumber)->update([
+					'bank_order_id' => $data['orderId']
+				]);
 
 				if (request("ajax")) return response()->json($data);
 
@@ -151,6 +159,8 @@ class DskBankController extends Controller
 
 	public function successCallback(Request $request)
 	{
+		// Kullanıcı ödemeden sonra buraya yönlendirilir; PNR ise banka callback()
+		// metodunu çağırdığında ayrıca kaydedilir, bu yüzden henüz mevcut olmayabilir.
 		$orderId = request("order_id");
 
 		PassengerInformation::where("orderid", $orderId)->firstOrFail();
@@ -296,6 +306,11 @@ class DskBankController extends Controller
 		return $response->json();
 	}
 
+	/**
+	 * DSK Bank sunucudan sunucuya callback.
+	 *
+	 * URL: POST {APP_URL}/api/v1/callback (routes/api.php)
+	 */
 	public function callback(Request $request): bool
 	{
 		try {

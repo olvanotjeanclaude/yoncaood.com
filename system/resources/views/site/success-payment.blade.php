@@ -79,6 +79,7 @@
                             <thead class="table-green">
                                 <tr>
                                     <th>#</th>
+                                    <th>PNR</th>
                                     <th>İsim</th>
                                     <th>Pasaport</th>
                                     <th>Koltuk No</th>
@@ -90,6 +91,7 @@
                                 @foreach ($passengers as $index => $passenger)
                                     <tr>
                                         <td>{{ $index + 1 }}</td>
+                                        <td class="fw-semibold">{{ $passenger->pnr_number ?? '-' }}</td>
                                         <td>{{ $passenger->fullname }}</td>
                                         <td>{{ $passenger->passaportno }}</td>
                                         <td><span class="badge bdg-style bg-primary">{{ $passenger->seat }}</span></td>
