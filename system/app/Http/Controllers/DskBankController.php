@@ -159,9 +159,9 @@ class DskBankController extends Controller
 
 	public function successCallback(Request $request)
 	{
-		// Kullanıcı ödemeden sonra buraya yönlendirilir; PNR ise banka callback()
-		// metodunu çağırdığında ayrıca kaydedilir, bu yüzden henüz mevcut olmayabilir.
 		$orderId = request("order_id");
+
+		sleep(3);
 
 		PassengerInformation::where("orderid", $orderId)->firstOrFail();
 

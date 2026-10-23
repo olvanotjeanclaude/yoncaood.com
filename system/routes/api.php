@@ -24,7 +24,6 @@ Route::post('login', [AuthController::class, 'login']);
 
 Route::post('callback', [DskBankController::class, 'callback']);
 // Route::post('callback', [AuthController::class, 'callback']);
-Route::get('payment', function(){dd("pA");});
 Route::post('/dskbank/pay', [DskBankController::class, 'pay']);
 Route::post('/cancel-order/{order}', [DskBankController::class, 'cancelOrder'])->name("cancelOrder");
 
