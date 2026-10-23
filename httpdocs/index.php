@@ -9,6 +9,9 @@
 
 define('LARAVEL_START', microtime(true));
 
+// Server php.ini sets an invalid default_charset ("ISO8859-9"), which breaks htmlspecialchars()/htmlentities()
+ini_set('default_charset', 'UTF-8');
+
 /*
 |--------------------------------------------------------------------------
 | Register The Auto Loader
