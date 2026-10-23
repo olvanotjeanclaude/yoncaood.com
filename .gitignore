@@ -1,0 +1,41 @@
+# Only httpdocs/ (web root) and system/ (Laravel app) are tracked
+/*
+!/.gitignore
+!/httpdocs/
+!/system/
+
+# Environment files (any folder); keep example templates
+.env
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+/system/vendor/
+
+# Laravel runtime
+/system/public/hot
+/system/public/storage
+/system/storage/*.key
+/system/storage/*.index
+/system/storage/framework/config.php
+/system/storage/framework/routes.php
+/system/storage/framework/schedule-*
+/system/storage/framework/compiled.php
+/system/storage/framework/services.json
+/system/storage/framework/events.scanned.php
+/system/storage/framework/routes.scanned.php
+/system/storage/framework/down
+
+# Local databases
+/system/database/*.sqlite
+/system/database/*.sqlite-journal
+
+# Tooling and OS
+.phpunit.result.cache
+npm-debug.log
+yarn-error.log
+Homestead.json
+Homestead.yaml
+.DS_Store
+.user.ini
